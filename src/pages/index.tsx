@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import { api } from "(~/)/utils/api";
 import type { RouterOutputs } from "(~/)/utils/api";
 import { SignInButton, useUser } from "@clerk/nextjs";
