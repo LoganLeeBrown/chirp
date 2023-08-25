@@ -15,6 +15,8 @@ const filterUserForClient = (user: User) => {
     id: user.id,
     username: user.username,
     profilePicture: user.imageUrl,
+    firstName: user.firstName,
+    lastName: user.lastName,
   };
 };
 
@@ -50,11 +52,16 @@ export const postsRouter = createTRPCRouter({
           message: "Author for post not found",
         });
 
+      let defaultName = "egg";
+      if (author.firstName && author.lastName) {
+        defaultName = author.firstName + author.lastName;
+      }
+
       return {
         post,
         author: {
           ...author,
-          username: author.username ?? "egg",
+          username: author.username ?? defaultName,
         },
       };
     });
