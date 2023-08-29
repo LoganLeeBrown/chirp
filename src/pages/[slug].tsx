@@ -1,39 +1,51 @@
 import Head from "next/head";
-import { GetStaticProps, type NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import { api } from "../utils/api";
 import { prisma } from "../server/db";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import superJSON from "superjson";
+import { appRouter } from "../server/api/root";
+import { PageLayout } from "../components/layout";
+import Image from "next/image";
 
-const ProfilePage: NextPage = () => {
-  const { data, isLoading } = api.profile.getUserByUsername.useQuery({
-    username: "loganleebrown",
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
   });
-
-  if (isLoading) return <div>Loading...</div>;
-
   if (!data) return <div>404</div>;
+
+  console.log(username);
+
   return (
     <>
       <Head>
-        <title>Profile</title>
+        <title>{data.username}</title>
       </Head>
-      <main className="flex h-screen justify-center">
-        <div>{data.username}</div>
-      </main>
+      <PageLayout>
+        <div className="relative h-48 bg-slate-600">
+          <Image
+            src={data.profilePicture}
+            alt={`${data.username ?? ""}'s profile pic`}
+            width={128}
+            height={128}
+            className="absolute bottom-0 left-0 -mb-[64px] ml-4 rounded-full border-4 border-black"
+          />
+        </div>
+        <div className="h-[64px]" />
+        <div className="p-4">{data.username}</div>
+      </PageLayout>
     </>
   );
 };
-import { createServerSideHelpers } from "@trpc/react-query/server";
-import SuperJSON from "superjson";
-import { appRouter } from "../server/api/root";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = createServerSideHelpers({
     router: appRouter,
     ctx: { prisma, userId: null },
-    transformer: SuperJSON, // optional - adds superjson serialization
+    transformer: superJSON, // optional - adds superjson serialization
   });
 
-  const slug = context.params?.slug;
+  const slug = context.params?.slug as string;
 
   if (typeof slug !== "string") throw new Error("no slug");
 
@@ -44,6 +56,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       trpcState: ssg.dehydrate(),
+      username,
     },
   };
 };
