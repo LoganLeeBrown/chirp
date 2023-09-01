@@ -10,8 +10,38 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { PageLayout } from "../components/layout";
 import { PostView } from "../components/postView";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
+
+const Home: NextPage = () => {
+  const { isSignedIn, user } = useUser();
+
+  api.posts.getAll.useQuery();
+
+  if (!user) return <div />;
+
+  const hasUsername = user.username;
+
+  return (
+    <PageLayout>
+      <div className="border-b border-slate-400 p-4">
+        {!isSignedIn && (
+          <div className="flex justify-center">
+            <SignInButton />
+          </div>
+        )}
+        {!hasUsername && (
+          <Link href={`/user/${user.id}`}>
+            <span>Add Username</span>
+          </Link>
+        )}
+        {isSignedIn && hasUsername && <CreatePostWizard />}
+      </div>
+      <Feed />
+    </PageLayout>
+  );
+};
 
 const CreatePostWizard = () => {
   const { user } = useUser();
@@ -74,29 +104,6 @@ const Feed = () => {
         <PostView {...fullPost} key={fullPost.post.id} />
       ))}
     </div>
-  );
-};
-
-const Home: NextPage = () => {
-  const { isLoaded: userLoaded, isSignedIn } = useUser();
-
-  api.posts.getAll.useQuery();
-
-  //return empty div if BOTH aren't loaded, since user tends to load faster
-  if (!userLoaded) return <div />;
-
-  return (
-    <PageLayout>
-      <div className="border-b border-slate-400 p-4">
-        {!isSignedIn && (
-          <div className="flex justify-center">
-            <SignInButton />
-          </div>
-        )}
-        {isSignedIn && <CreatePostWizard />}
-      </div>
-      <Feed />
-    </PageLayout>
   );
 };
 

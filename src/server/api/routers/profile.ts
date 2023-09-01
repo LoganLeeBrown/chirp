@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "(~/)/server/api/trpc";
+import {
+  createTRPCRouter,
+  publicProcedure,
+  privateProcedure,
+} from "(~/)/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 import { clerkClient } from "@clerk/nextjs";
 import { filterUserForClient } from "../../helpers/filterUserForClient";
@@ -20,5 +24,21 @@ export const profileRouter = createTRPCRouter({
       }
 
       return filterUserForClient(user);
+    }),
+
+  updateUsernameByUser: privateProcedure
+    .input(
+      z.object({
+        content: z.string().min(1, "Username Empty").max(30),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.userId;
+
+      const params = { username: input.content };
+
+      const user = await clerkClient.users.updateUser(userId, params);
+
+      return user;
     }),
 });
