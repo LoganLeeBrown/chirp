@@ -14,13 +14,18 @@ export default function Post() {
 
   return (
     <PageLayout>
-      <div className="border-b border-slate-400 p-4">
+      <div className="flex justify-center border-b border-slate-400 p-4">
         {!user.username && <CreateUserNameWizard />}
         {user.username && (
-          <Link href={"/"}>
-            <span>Username Added! Return to Home</span>
-          </Link>
+          <span className="flex h-5 w-40 justify-center">Username Added</span>
         )}
+      </div>
+      <div className="w-30 mt-2 flex h-10 justify-center">
+        <Link href={"/"} className="flex justify-center">
+          <span className="flex w-40 justify-center rounded-full bg-blue-500 pt-1.5">
+            Return to Home Page
+          </span>
+        </Link>
       </div>
     </PageLayout>
   );
@@ -63,14 +68,19 @@ const CreateUserNameWizard = () => {
         height={56}
       />
       <input
-        placeholder="You need a username!"
+        placeholder="Input Username"
         className="grow bg-transparent outline-none"
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         disabled={isPosting}
       />
-      <button onClick={() => mutate({ content: input })}>Upload</button>
+      <button
+        className="mt-2 h-10 w-20 rounded-full bg-blue-500"
+        onClick={() => mutate({ content: input })}
+      >
+        Upload
+      </button>
     </div>
   );
 };

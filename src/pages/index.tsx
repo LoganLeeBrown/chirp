@@ -32,8 +32,10 @@ const Home: NextPage = () => {
           </div>
         )}
         {!hasUsername && (
-          <Link href={`/user/${user.id}`}>
-            <span>Add Username</span>
+          <Link href={`/user/${user.id}`} className="flex justify-center">
+            <div className="flex w-40 justify-center rounded-full bg-blue-500">
+              <span>Add Username</span>
+            </div>
           </Link>
         )}
         {isSignedIn && hasUsername && <CreatePostWizard />}
