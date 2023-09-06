@@ -4,18 +4,18 @@ import { AiOutlineHome } from "react-icons/ai";
 
 export const PageLayout = (props: PropsWithChildren) => {
   return (
-    <main className="flex h-screen justify-center">
-      <div className="w-0 shrink flex-col justify-end pr-1">
-        <div className="flex justify-end py-3 pr-3 text-white">
+    <main className="flex h-screen flex-col justify-center sm:flex-row">
+      <div>
+        <div className="flex items-center justify-center py-2">
           <Link href="https://portfolibo.vercel.app/">
-            <AiOutlineHome className="flex h-10 w-10"></AiOutlineHome>
+            <AiOutlineHome className="h-10 w-10"></AiOutlineHome>
           </Link>
         </div>
       </div>
-      <div className=" h-full w-3/4 overflow-y-auto border-x border-slate-400 md:max-w-2xl">
+      <div className="overflow-y-auto border-x border-slate-400 ">
         {props.children}
       </div>
-      <div className="flex sm:w-0 lg:w-1/4"></div>
+      <div></div>
     </main>
   );
 };
