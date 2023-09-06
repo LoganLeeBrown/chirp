@@ -16,7 +16,7 @@ export const PageLayout = (props: PropsWithChildren) => {
           </Link>
         </div>
       </div>
-      <div className="overflow-y-auto border-x border-slate-400">
+      <div className=" max-w-[600px] overflow-y-auto border-x border-slate-400">
         {props.children}
       </div>
       <div></div>
