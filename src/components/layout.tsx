@@ -15,7 +15,7 @@ export const PageLayout = (props: PropsWithChildren) => {
       <div className=" h-full w-2/4 overflow-y-auto border-x border-slate-400 md:max-w-2xl">
         {props.children}
       </div>
-      <div className="flex lg:w-1/4"></div>
+      <div className="flex sm:w-0 lg:w-1/4"></div>
     </main>
   );
 };
