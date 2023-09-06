@@ -14,15 +14,13 @@ export default function Post() {
 
   return (
     <PageLayout>
-      <div className="flex justify-center border-b border-slate-400 p-4">
+      <div className="flex justify-center border-y border-slate-400 p-4">
         {!user.username && <CreateUserNameWizard />}
-        {user.username && (
-          <span className="flex h-5 w-40 justify-center">Username Added</span>
-        )}
+        {user.username && <span className="h-5">Username Added</span>}
       </div>
-      <div className="w-30 mt-2 flex h-10 justify-center">
-        <Link href={"/"} className="flex justify-center">
-          <span className="flex w-40 justify-center rounded-full bg-blue-500 pt-1.5">
+      <div className="w-30 flex h-10 justify-center border-b py-2">
+        <Link href={"/"} className="">
+          <span className="rounded-full bg-blue-500 px-2 py-1">
             Return to Home Page
           </span>
         </Link>
