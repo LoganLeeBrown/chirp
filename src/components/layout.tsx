@@ -5,7 +5,7 @@ import { AiOutlineHome } from "react-icons/ai";
 export const PageLayout = (props: PropsWithChildren) => {
   return (
     <main className="flex h-screen justify-center">
-      <div className="w-1/4 flex-col justify-end">
+      <div className="w-1/4 shrink flex-col justify-end">
         <div className="flex justify-end py-3 pr-3 text-white">
           <Link href="https://portfolibo.vercel.app/">
             <AiOutlineHome className="flex h-10 w-10"></AiOutlineHome>
