@@ -8,9 +8,9 @@ export const PageLayout = (props: PropsWithChildren) => {
     <main className="flex h-screen flex-col md:flex-row md:justify-center">
       <div>
         <div className="flex justify-around py-2 md:flex-col ">
-          <a href="./">
+          <Link href="/">
             <AiOutlineHome className="h-10 w-10 md:mx-2 md:my-2"></AiOutlineHome>
-          </a>
+          </Link>
           <Link href="https://portfolibo.vercel.app/">
             <AiOutlineSelect className="h-10 w-10 md:mx-2 md:my-2"></AiOutlineSelect>
           </Link>
