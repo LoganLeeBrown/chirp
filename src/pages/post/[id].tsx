@@ -19,7 +19,9 @@ const SinglePostPage: NextPage<{ id: string }> = ({ id }) => {
         <title>{`${data.post.content} - ${data.author.username}`}</title>
       </Head>
       <PageLayout>
-        <PostView {...data} />
+        <div className="border-y border-slate-400">
+          <PostView {...data} />
+        </div>
       </PageLayout>
     </>
   );
