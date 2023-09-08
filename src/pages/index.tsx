@@ -25,22 +25,24 @@ const Home: NextPage = () => {
 
   return (
     <PageLayout>
-      <div className=" border-y border-slate-400 p-4">
-        {!isSignedIn && (
-          <div className="flex justify-center">
-            <SignInButton />
-          </div>
-        )}
-        {!hasUsername && (
-          <Link href={`/user/${user.id}`} className="flex justify-center">
-            <div className="flex w-40 justify-center rounded-full bg-blue-500">
-              <span>Add Username</span>
+      <div className="flex flex-col">
+        <div className=" border-y border-slate-400 p-4">
+          {!isSignedIn && (
+            <div className="flex justify-center">
+              <SignInButton />
             </div>
-          </Link>
-        )}
-        {isSignedIn && hasUsername && <CreatePostWizard />}
+          )}
+          {!hasUsername && (
+            <Link href={`/user/${user.id}`} className="flex justify-center">
+              <div className="flex w-40 justify-center rounded-full bg-blue-500">
+                <span>Add Username</span>
+              </div>
+            </Link>
+          )}
+          {isSignedIn && hasUsername && <CreatePostWizard />}
+        </div>
+        <Feed />
       </div>
-      <Feed />
     </PageLayout>
   );
 };
@@ -96,7 +98,12 @@ const CreatePostWizard = () => {
 const Feed = () => {
   const { data, isLoading: postsLoading } = api.posts.getAll.useQuery();
 
-  if (postsLoading) return <LoadingPage />;
+  if (postsLoading)
+    return (
+      <div className="flex flex-col">
+        <LoadingPage />
+      </div>
+    );
 
   if (!data) return <div>Something went wrong</div>;
 

@@ -5,7 +5,7 @@ import { AiOutlineSelect } from "react-icons/ai";
 
 export const PageLayout = (props: PropsWithChildren) => {
   return (
-    <main className="flex h-screen flex-col justify-center md:flex-row">
+    <main className="flex h-screen flex-col md:flex-row md:justify-center">
       <div>
         <div className="flex justify-around py-2 md:flex-col ">
           <a href="./">
@@ -16,7 +16,7 @@ export const PageLayout = (props: PropsWithChildren) => {
           </Link>
         </div>
       </div>
-      <div className=" max-w-[600px] overflow-y-auto border-x border-slate-400">
+      <div className=" max-w-[600px] overflow-y-auto border-x border-slate-400 md:min-w-[600px]">
         {props.children}
       </div>
       <div></div>
