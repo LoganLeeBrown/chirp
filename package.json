@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@bojackstudios/bojackrepo": "^1.0.0",
     "@clerk/nextjs": "^4.23.2",
     "@prisma/client": "^5.1.1",
     "@t3-oss/env-nextjs": "^0.3.1",
