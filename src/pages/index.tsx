@@ -17,8 +17,6 @@ dayjs.extend(relativeTime);
 const Home: NextPage = () => {
   const { isSignedIn, user } = useUser();
 
-  api.posts.getAll.useQuery();
-
   if (!user) return <div />;
 
   const hasUsername = user.username;
